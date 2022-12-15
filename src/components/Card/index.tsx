@@ -7,6 +7,8 @@ interface Props {
 export const Card: React.FC<Props> = ({ url }) => {
   const { data } = usePokemon(url)
 
+  console.log(data)
+
   const COLOR = {
     bug: "bg-green-400",
     dark: "bg-gray-800",
@@ -30,10 +32,12 @@ export const Card: React.FC<Props> = ({ url }) => {
 
   return (
     <div
-      className={`w-full flex flex-col justify-center items-center rounded-lg ${COLOR[data?.data.types[0].type.name]}`}
+      className={`w-full h-32 flex flex-col cursor-pointer justify-center items-center rounded-lg ease-in hover:scale-105 ${
+        COLOR[data?.types[0].type.name]
+      }`}
     >
-      <img src={data?.data.sprites.front_default} alt={data?.data.name} />
-      <p className="text-white">{data?.data.name}</p>
+      <img src={data?.sprites.front_default} alt={data?.name} />
+      <p className="text-white capitalize">{data?.name}</p>
     </div>
   )
 }

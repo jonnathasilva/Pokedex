@@ -70,6 +70,11 @@ interface Pokemon {
   types: Types[]
 }
 
+const Pokemon = async (url: string) => {
+  const { data } = await axios.get<Pokemon>(url)
+  return data
+}
+
 export const usePokemon = (url: string) => {
-  return useQuery(["Card", url], () => axios.get<Pokemon>(url))
+  return useQuery(["Card", url], () => Pokemon(url))
 }

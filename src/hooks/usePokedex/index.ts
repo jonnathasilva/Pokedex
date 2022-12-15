@@ -13,6 +13,11 @@ interface Pokedex {
   results: Item[]
 }
 
+const Pokedex = async () => {
+  const { data } = await axios.get<Pokedex>("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=248")
+  return data
+}
+
 export const usePokedex = () => {
-  return useQuery(["pokedex"], () => axios.get<Pokedex>("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=248"))
+  return useQuery(["pokedex"], Pokedex)
 }
