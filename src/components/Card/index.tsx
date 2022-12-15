@@ -1,4 +1,5 @@
-import { usePokemon } from "../../hooks"
+import { usePokemon } from "@/hooks"
+import { Link } from "react-router-dom"
 
 interface Props {
   url: string
@@ -6,8 +7,6 @@ interface Props {
 
 export const Card: React.FC<Props> = ({ url }) => {
   const { data } = usePokemon(url)
-
-  console.log(data)
 
   const COLOR = {
     bug: "bg-green-400",
@@ -31,13 +30,14 @@ export const Card: React.FC<Props> = ({ url }) => {
   }
 
   return (
-    <div
-      className={`w-full h-32 flex flex-col cursor-pointer justify-center items-center rounded-lg ease-in hover:scale-105 ${
+    <Link
+      to={`/pokemon/${data?.name}`}
+      className={`w-full h-32 flex flex-col justify-center items-center rounded-lg ease-in hover:scale-105 ${
         COLOR[data?.types[0].type.name]
       }`}
     >
       <img src={data?.sprites.front_default} alt={data?.name} />
       <p className="text-white capitalize">{data?.name}</p>
-    </div>
+    </Link>
   )
 }
