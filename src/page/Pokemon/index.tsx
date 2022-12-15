@@ -1,4 +1,4 @@
-import { usePokemon } from "../../hooks"
+import { usePokemon } from "@/hooks"
 import { useParams } from "react-router-dom"
 
 export const Pokemon = () => {

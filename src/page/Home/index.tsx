@@ -1,5 +1,5 @@
-import { usePokedex } from "../../hooks"
-import { Card } from "../../components"
+import { usePokedex } from "@/hooks"
+import { Card } from "@/components"
 
 export const Home = () => {
   const { data } = usePokedex()
