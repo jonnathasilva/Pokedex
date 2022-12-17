@@ -1,33 +1,17 @@
 import { usePokemon } from "@/hooks"
+import * as Style from "./index.styles"
 import { useParams } from "react-router-dom"
 
 export const Pokemon = () => {
   const { name } = useParams()
-  const { data } = usePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`)
+  const { data, isLoading } = usePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
-  const COLOR = {
-    bug: "bg-green-400",
-    dark: "bg-gray-800",
-    dragon: "bg-purple-800",
-    electric: "bg-yellow-400",
-    fairy: "bg-pink-400",
-    fighting: "bg-red-900",
-    fire: "bg-red-400",
-    flying: "bg-indigo-600",
-    ghost: "bg-indigo-700",
-    grass: "bg-green-600",
-    ground: "bg-yellow-700",
-    ice: "bg-blue-400",
-    normal: "bg-gray-500",
-    poison: "bg-purple-600",
-    psychic: "bg-pink-700",
-    rock: "bg-yellow-600",
-    steel: "bg-gray-400",
-    water: "bg-blue-500",
+  if (isLoading) {
+    return <div>Carregando...</div>
   }
 
   return (
-    <div className={`h-screen space-y-10  flex flex-col items-center ${COLOR[data?.types[0].type.name]}`}>
+    <Style.Container className={data?.types[0].type.name}>
       <div className="w-40 ">
         <img className="w-full h-full" src={data?.sprites.front_default} alt={data?.name} />
       </div>
@@ -45,7 +29,7 @@ export const Pokemon = () => {
 
         <div className="w-4/5 mx-auto">
           {data?.stats.map((item) => (
-            <div className="flex items-center space-x-2 space-y-2">
+            <div key={item.stat.name} className="flex items-center space-x-2 space-y-2">
               <p className="capitalize">{item.stat.name}</p>
               <span className="flex-1 h-6 rounded-full bg-white">{item.base_stat}/300</span>
             </div>
@@ -57,6 +41,6 @@ export const Pokemon = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Style.Container>
   )
 }
