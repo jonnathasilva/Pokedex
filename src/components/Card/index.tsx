@@ -6,7 +6,11 @@ interface Props {
 }
 
 export const Card: React.FC<Props> = ({ url }) => {
-  const { data } = usePokemon(url)
+  const { data, isLoading } = usePokemon(url)
+
+  if (isLoading) {
+    return <div>Carregando...</div>
+  }
 
   return (
     <Link

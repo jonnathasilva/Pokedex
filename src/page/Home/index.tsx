@@ -5,7 +5,7 @@ export const Home = () => {
   const { data } = usePokedex()
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 pb-5">
       <header className="bg-[#d53b47] h-14 flex items-center">
         <h1 className="px-6 text-3xl text-white font-bold">Pokedex</h1>
       </header>
