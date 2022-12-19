@@ -1,11 +1,11 @@
 import { usePokemon } from "@/hooks"
 import { ProgressBar } from "@/components"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useSearchParams } from "react-router-dom"
 import { BsArrowLeft } from "react-icons/bs"
 
 export const Pokemon = () => {
-  const { name } = useParams()
-  const { data, isLoading } = usePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`)
+  const [searchParams] = useSearchParams()
+  const { data, isLoading } = usePokemon(`https://pokeapi.co/api/v2/pokemon/${searchParams.get("name")}`)
 
   if (isLoading) {
     return <div>Carregando...</div>
@@ -13,7 +13,7 @@ export const Pokemon = () => {
 
   return (
     <div className={`min-h-screen py-5 space-y-5 flex flex-col ${data?.types[0].type.name}`}>
-      <Link to="/" className="inline-flex w-32 space-x-2 px-2">
+      <Link to={`/?page=${searchParams.get("page")}`} className="inline-flex w-32 space-x-2 px-2">
         <BsArrowLeft size={25} color="#FFF" />
 
         <span className="text-white font-medium">Pokedex</span>
