@@ -27,7 +27,7 @@ export const Pokemon = () => {
   }
 
   return (
-    <div className={`h-screen space-y-10  flex flex-col items-center ${COLOR[data?.types[0].type.name]}`}>
+    <div className={`h-screen space-y-10  flex flex-col items-center ${data?.types[0].type.name}`}>
       <div className="w-40 ">
         <img className="w-full h-full" src={data?.sprites.front_default} alt={data?.name} />
       </div>
