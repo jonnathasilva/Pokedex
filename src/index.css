@@ -9,7 +9,9 @@ body {
 progress {
   border-radius: 9999px;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  transition: all ease 1s;
 }
+
 progress::-webkit-progress-bar {
   background-color: white;
   border-radius: 9999px;

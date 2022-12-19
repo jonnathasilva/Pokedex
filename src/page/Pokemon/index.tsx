@@ -1,5 +1,6 @@
 import { usePokemon } from "../../hooks"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
+import { BsArrowLeft } from "react-icons/bs"
 
 export const Pokemon = () => {
   const { name } = useParams()
@@ -10,8 +11,14 @@ export const Pokemon = () => {
   }
 
   return (
-    <div className={`h-screen space-y-10  flex flex-col items-center ${data?.types[0].type.name}`}>
-      <div className="w-40 ">
+    <div className={`h-screen space-y-5 flex flex-col  ${data?.types[0].type.name}`}>
+      <Link to="/" className="inline-flex space-x-2 p-2">
+        <BsArrowLeft size={25} color="#FFF" />
+
+        <span className="text-white font-medium">Pokedex</span>
+      </Link>
+
+      <div className="w-40 mx-auto">
         <img className="w-full h-full" src={data?.sprites.front_default} alt={data?.name} />
       </div>
 
@@ -26,14 +33,26 @@ export const Pokemon = () => {
           ))}
         </div>
 
+        <div className="flex justify-center space-x-9">
+          <div>
+            <p className="text-lg font-bold text-white">{data?.weight} HG</p>
+            <span>Weight</span>
+          </div>
+
+          <div>
+            <p className="text-lg font-bold text-white">{data?.height} DM</p>
+            <span>Height</span>
+          </div>
+        </div>
+
         <div className="w-4/5 mx-auto space-y-2">
           {data?.stats.map((item) => (
             <div className="flex items-center space-x-2">
               <p className="capitalize text-sm text-white">{item.stat.name}</p>
 
-              <span className="text-sm text-white">{item.base_stat}/300</span>
+              <span className="text-sm text-white">{item.base_stat}/250</span>
 
-              <progress className="flex-1 text-black rounded-full" value={item.base_stat} max={300}></progress>
+              <progress className="flex-1 text-black rounded-full" value={item.base_stat} max={250}></progress>
             </div>
           ))}
 
