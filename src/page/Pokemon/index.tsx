@@ -3,27 +3,10 @@ import { useParams } from "react-router-dom"
 
 export const Pokemon = () => {
   const { name } = useParams()
-  const { data } = usePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`)
+  const { data, isLoading } = usePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
-  const COLOR = {
-    bug: "bg-green-400",
-    dark: "bg-gray-800",
-    dragon: "bg-purple-800",
-    electric: "bg-yellow-400",
-    fairy: "bg-pink-400",
-    fighting: "bg-red-900",
-    fire: "bg-red-400",
-    flying: "bg-indigo-600",
-    ghost: "bg-indigo-700",
-    grass: "bg-green-600",
-    ground: "bg-yellow-700",
-    ice: "bg-blue-400",
-    normal: "bg-gray-500",
-    poison: "bg-purple-600",
-    psychic: "bg-pink-700",
-    rock: "bg-yellow-600",
-    steel: "bg-gray-400",
-    water: "bg-blue-500",
+  if (isLoading) {
+    return <div>Carregando...</div>
   }
 
   return (
@@ -43,17 +26,25 @@ export const Pokemon = () => {
           ))}
         </div>
 
-        <div className="w-4/5 mx-auto">
+        <div className="w-4/5 mx-auto space-y-2">
           {data?.stats.map((item) => (
-            <div className="flex items-center space-x-2 space-y-2">
-              <p className="capitalize">{item.stat.name}</p>
-              <span className="flex-1 h-6 rounded-full bg-white">{item.base_stat}/300</span>
+            <div className="flex items-center space-x-2">
+              <p className="capitalize text-sm text-white">{item.stat.name}</p>
+
+              <span className="text-sm text-white">{item.base_stat}/300</span>
+
+              <progress className="flex-1 text-black rounded-full" value={item.base_stat} max={300}></progress>
             </div>
           ))}
 
-          <div className="flex items-center space-x-2 space-y-2">
-            <p className="capitalize">EXP</p>
-            <span className="flex-1 h-6 rounded-full bg-white">{data?.base_experience}/1000</span>
+          <div className="flex items-center space-x-2">
+            <p className="capitalize text-sm text-white">EXP</p>
+
+            <span className="text-sm text-white">{data?.base_experience}/1000</span>
+
+            <progress className="flex-1 text-black rounded-full" value={data?.base_experience} max={1000}>
+              100%
+            </progress>
           </div>
         </div>
       </div>

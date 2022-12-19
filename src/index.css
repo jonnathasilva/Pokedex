@@ -6,6 +6,19 @@ body {
   background-color: #2b292c;
 }
 
+progress {
+  border-radius: 9999px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+progress::-webkit-progress-bar {
+  background-color: white;
+  border-radius: 9999px;
+}
+progress::-webkit-progress-value {
+  background-color: orangered;
+  border-radius: 7px;
+}
+
 .bug {
   background-color: #4ade80;
 }
