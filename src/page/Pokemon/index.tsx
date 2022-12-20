@@ -1,6 +1,7 @@
 import { usePokemon } from "@/hooks"
-import { ProgressBar } from "@/components"
-import { useParams, Link, useSearchParams } from "react-router-dom"
+import { ProgressBar, Loading } from "@/components"
+import { Link, useSearchParams } from "react-router-dom"
+
 import { BsArrowLeft } from "react-icons/bs"
 
 export const Pokemon = () => {
@@ -8,7 +9,7 @@ export const Pokemon = () => {
   const { data, isLoading } = usePokemon(`https://pokeapi.co/api/v2/pokemon/${searchParams.get("name")}`)
 
   if (isLoading) {
-    return <div>Carregando...</div>
+    return <Loading />
   }
 
   return (

@@ -1,4 +1,5 @@
 import { usePokemon } from "@/hooks"
+import { Loading } from "@/components"
 import { useSearchParams, Link } from "react-router-dom"
 
 interface Props {
@@ -9,8 +10,12 @@ export const Card: React.FC<Props> = ({ url }) => {
   const [searchParams] = useSearchParams()
   const { data, isLoading } = usePokemon(url)
 
-  if (isLoading) {
-    return <div>Carregando...</div>
+  if (isLoading || !data?.sprites.front_default) {
+    return (
+      <div data-testid="loading" className="transform">
+        <div className="border-t-transparent border-solid animate-spin rounded-full border-black-400 border-8 h-20 w-20"></div>
+      </div>
+    )
   }
 
   return (

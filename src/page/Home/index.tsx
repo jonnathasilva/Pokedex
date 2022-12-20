@@ -1,7 +1,7 @@
 import { usePokedex } from "@/hooks"
 import { Card } from "@/components"
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs"
-import { useSearchParams, useNavigate } from "react-router-dom"
+import { useSearchParams, useNavigate, Link } from "react-router-dom"
 
 export const Home = () => {
   const [searchParams] = useSearchParams()
@@ -23,7 +23,9 @@ export const Home = () => {
   return (
     <div className="space-y-5 pb-5">
       <header className="bg-[#d53b47] h-14 flex items-center">
-        <h1 className="px-6 text-3xl text-white font-bold">Pokedex</h1>
+        <h1 className="px-6 text-3xl text-white font-bold">
+          <Link to="/">Pokedex</Link>
+        </h1>
       </header>
 
       <div className="px-6 space-y-4">
