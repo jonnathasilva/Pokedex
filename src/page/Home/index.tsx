@@ -32,6 +32,7 @@ export const Home = () => {
         <div className="flex w-full justify-end space-x-4">
           <span
             className="w-6 h-6 bg-[#4f4d50] flex items-center justify-center rounded-md cursor-pointer"
+            data-testid="next"
             onClick={previous}
           >
             <BsChevronCompactLeft color="#FFF" size={20} />
