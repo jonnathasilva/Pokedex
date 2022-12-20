@@ -1,5 +1,4 @@
 import { usePokemon } from "@/hooks"
-import { Loading } from "@/components"
 import { useSearchParams, Link } from "react-router-dom"
 
 interface Props {
