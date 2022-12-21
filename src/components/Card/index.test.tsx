@@ -1,4 +1,4 @@
-import { describe, expect, afterEach, beforeEach } from "vitest"
+import { describe, expect, afterEach, beforeEach, vi } from "vitest"
 import { render } from "@testing-library/react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { MemoryRouter } from "react-router-dom"
@@ -10,14 +10,6 @@ const mockedUsePokemon = usePokemon as jest.Mock<any>
 vi.mock("../../hooks/usePokemon")
 
 describe("Component Card", () => {
-  beforeEach(() => {
-    mockedUsePokemon.mockImplementation(() => ({ isLoading: false }))
-  })
-
-  afterEach(() => {
-    vi.clearAllMocks()
-  })
-
   const queryClient = new QueryClient()
   const url = "http://localhost:5000/"
 
@@ -29,7 +21,17 @@ describe("Component Card", () => {
     name: "rhyhorn",
   }
 
+  beforeEach(() => {
+    mockedUsePokemon.mockImplementation(() => ({ isLoading: false, data: mockData }))
+  })
+
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
   it("should show Loading", () => {
+    mockedUsePokemon.mockImplementation(() => ({ isLoading: true }))
+
     const { getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={["/"]}>
@@ -42,8 +44,6 @@ describe("Component Card", () => {
   })
 
   it("should redirect to profile", () => {
-    mockedUsePokemon.mockImplementation(() => ({ isLoading: false, data: mockData }))
-
     const { getByRole } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={["/"]}>
@@ -56,8 +56,6 @@ describe("Component Card", () => {
   })
 
   it("should show image", () => {
-    mockedUsePokemon.mockImplementation(() => ({ isLoading: false, data: mockData }))
-
     const { getByRole } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={["/"]}>
@@ -71,8 +69,6 @@ describe("Component Card", () => {
   })
 
   it("should show pokemon name", () => {
-    mockedUsePokemon.mockImplementation(() => ({ isLoading: false, data: mockData }))
-
     const { getByText } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={["/"]}>
